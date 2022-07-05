@@ -14,9 +14,9 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    FlutterDeviceFriendlyName.friendlyName.then((x) {
+    FlutterDeviceFriendlyName.friendlyName.then((String? x) {
       setState(() {
-        _friendlyName = x; 
+        _friendlyName = x ?? 'No name found.';
       });
     });
   }

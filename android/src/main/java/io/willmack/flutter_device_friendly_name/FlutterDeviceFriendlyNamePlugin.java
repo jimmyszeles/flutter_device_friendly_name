@@ -57,7 +57,10 @@ public class FlutterDeviceFriendlyNamePlugin implements FlutterPlugin, MethodCal
             if (android.os.Build.VERSION.SDK_INT < 17) {
                 return;
             }
-            String friendlyName = Settings.Secure.getString(context.getContentResolver(), "bluetooth_name");
+            String friendlyName = null;
+            if (android.os.Build.VERSION.SDK_INT <= 31) {
+                friendlyName = Settings.Secure.getString(context.getContentResolver(), "bluetooth_name");
+            }
             if ((friendlyName == null) || friendlyName.isEmpty()) {
                 friendlyName = Settings.Global.getString(context.getContentResolver(), "device_name");
             }

@@ -2,14 +2,14 @@ group 'io.willmack.flutter_device_friendly_name'
 version '1.0-SNAPSHOT'
 
 buildscript {
-    ext.kotlin_version = '2.0.0'
+    ext.kotlin_version = '2.0.20'
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.1.1'
+        classpath 'com.android.tools.build:gradle:8.1.4'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
@@ -17,7 +17,7 @@ buildscript {
 rootProject.allprojects {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
 }
 
@@ -25,34 +25,23 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 34
+    namespace "io.willmack.flutter_device_friendly_name"
 
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
     defaultConfig {
         minSdkVersion 23
+        compileSdk 34
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     lintOptions {
         disable 'InvalidPackage'
     }
-    buildToolsVersion '34.0.0'
 }
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'com.google.code.gson:gson:2.8.6'
+    implementation 'com.google.code.gson:gson:2.11.0'
     implementation 'com.google.android.material:material:1.12.0'
-}
-
-subprojects {
-    afterEvaluate {project ->
-        if (project.hasProperty("android")) {
-            android {
-                compileSdkVersion 34
-                buildToolsVersion "34.0.0"
-            }
-        }
-    }
 }

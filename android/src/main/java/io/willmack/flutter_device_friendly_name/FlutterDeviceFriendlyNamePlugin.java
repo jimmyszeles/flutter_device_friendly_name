@@ -54,9 +54,6 @@ public class FlutterDeviceFriendlyNamePlugin implements FlutterPlugin, MethodCal
     @Override
     public void onMethodCall(MethodCall call, Result result) {
         if (call.method.equals("getDeviceFriendlyName")) {
-            if (android.os.Build.VERSION.SDK_INT < 17) {
-                return;
-            }
             String friendlyName = null;
             if (android.os.Build.VERSION.SDK_INT <= 31) {
                 friendlyName = Settings.Secure.getString(context.getContentResolver(), "bluetooth_name");
